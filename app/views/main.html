@@ -1,0 +1,11 @@
+<div class="hero-unit">
+  Search: <input ng-model="comment_query">
+
+  <div class="alert alert-error">{{status}}</div>
+  <h1>{{ title }}</h1>
+  <ul>
+    <li ng-repeat="comment in comments | filter:comment_query | orderBy:orderProp">
+      {{comment.user}} ({{comment.date}}): {{comment.comment}}
+    </li>
+  </ul>
+</div>
