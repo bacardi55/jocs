@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jocsApp', [])
+angular.module('jocsApp', ['PocsServices'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

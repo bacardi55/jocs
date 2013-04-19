@@ -1,0 +1,8 @@
+JOCS - Javascript Opensource Comment System
+
+A comment system in javascript like a very small disqus.
+
+written with angularjs.
+
+Need a REST backend.
+Default one is pocs written in php with silex.
