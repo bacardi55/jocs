@@ -1,37 +1,66 @@
-<div class="hero-unit">
-  Search: <input ng-model="comment_query">
+<div class="">
 
-  <div ng-hide="status" class="alert alert-error">{{error_message}}</div>
-  <div ng-show="status && status_message" class="alert alert-success">{{status_message}}</div>
+  <div ng-hide="status" class="alert alert-error">{{errorMessage}}</div>
+  <div ng-show="status && status_message" class="alert alert-success">{{statusMessage}}</div>
   <h1>{{ title }}</h1>
 
-  <form novalidate id="newComment" name="form">
-    <label for="name">Name</label>:
-    <div ng-show="form.newName.$dirty && form.newName.$invalid">
-      The username is mandatory
-    </div>
-    <input id="name" type="text" ng-model="newComment.name" name="newName" required/>
-    <br/>
-    <label for="email">Email</label>:
-    <div ng-show="form.newEmail.$dirty && form.newEmail.$invalid">
-      The Email address is mandatory
-    </div>
-    <input id="email" type="text" ng-model="newComment.email" name="newEmail" required/>
-    <br/>
-    <label for="newCom">Comment</label>:
-    <div ng-show="form.newCom.$dirty && form.newCom.$invalid">
-      The Comment is mandatory is mandatory
-    </div>
-    <textarea id="newCom" ng-model="newComment.com" name="newCom" required></textarea><br/>
-    <button ng-click="reset()">Reset</button>
-    <button ng-click="addComment(newComment)" ng-disabled="form.$invalid">
-      Send
-    </button>
-  </form>
+  <div ng-show="comments.length > 0">
+    Search in comments: <input ng-model="comment_query">
+  </div>
 
-  <ul>
-    <li ng-repeat="comment in comments | filter:comment_query">
-      {{comment.user}} ({{comment.date}}): {{comment.comment}}
+  <ul class="media-list">
+    <li class="media" ng-repeat="comment in comments | filter:comment_query">
+       <a class="pull-left" href="#">
+         <img class="media-object" src="{{ comment.gravatar }}">
+       </a>
+      <div class="media-body">
+        <h4 class="media-heading">{{ comment.user }}</h4>
+        <div class="media">
+          {{ comment.comment }}
+        </div>
+        <div>
+          {{ comment.date }}
+        </div>
+      </div>
     </li>
   </ul>
+
+  <div ng-hide="commentSent">
+    <form novalidate id="newComment" name="form" ng-submit="addComment(newComment)"  class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+          <input id="name" type="text" ng-model="newComment.name" name="newName" required/>
+          <div ng-show="form.newName.$dirty && form.newName.$invalid">
+            The username is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input id="email" type="text" ng-model="newComment.email" name="newEmail" required/>
+          <div ng-show="form.newEmail.$dirty && form.newEmail.$invalid">
+            The Email address is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="newCom">Comment</label>
+        <div class="controls">
+          <textarea id="newCom" ng-model="newComment.com" name="newCom" required></textarea><br/>
+          <div ng-show="form.newCom.$dirty && form.newCom.$invalid">
+            The Comment is mandatory is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" ng-disabled="form.$invalid">
+            Send
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

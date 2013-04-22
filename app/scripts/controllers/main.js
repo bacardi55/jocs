@@ -1,64 +1,65 @@
 'use strict';
 
 angular.module('jocsApp')
-  .controller('MainCtrl', function ($scope, $window, Comments, $http) {
+  .controller('MainCtrl', function ($scope, $window, Comments) {
     $scope.comments = [];
-    $scope.title = 'Jocs\'s on me';
-    $scope.error_message = '';
+    $scope.title = 'Jocs\' on me';
+    $scope.errorMessage = '';
     $scope.status = 1;
-    $scope.status_message = 0;
+    $scope.statusMessage = 0;
+    $scope.commentSent = false;
 
     var getCommentSuccess = function(data) {
-      if (data.status == "success") {
-        $scope.error_message = '';
+      if (data.status === 'success') {
+        $scope.errorMessage = '';
         $scope.comments = data.comments;
         $scope.status = 1;
-        $scope.status_message = 0;
       }
       else {
-        $scope.status_message = 0;
-        $scope.error_message = "Comments for this page couldn't be retrieved";
+        $scope.statusMessage = 0;
+        $scope.errorMessage = 'Comments for this page couldn\'t be retrieved';
         $scope.status = 0;
-
       }
-    }
-    var getCommentError = function(data) {
-      $scope.status_message = 0;
-      $scope.error_message = "An error occured";
+    };
+
+    var getCommentError = function() {
+      $scope.statusMessage = 0;
+      $scope.errorMessage = 'An error occured';
       $scope.status = 0;
-    }
+    };
 
     var addSuccess = function(data) {
-      if (data.status == "success") {
-        $scope.error_message = '';
+      if (data.status === 'success') {
+        $scope.errorMessage = '';
         $scope.status = 1;
-        $scope.comments = data.comments;
-        $scope.status_message = data.message;
-        $scope.newComment = {};
+        $scope.statusMessage = data.message;
       }
       else {
-        $scope.status_message = 0;
-        $scope.error_message = $data.message;
+        $scope.statusMessage = 0;
+        $scope.errorMessage = data.message;
         $scope.status = 0;
-        $scope.message
+        $scope.message = '';
       }
-    }
-    var addError = function(data) {
-      $scope.error_message = 'Comment couldn\'t be added';
+
+      $scope.commentSent = true;
+      Comments.get(getCommentSuccess, getCommentError);
+    };
+
+    var addError = function() {
+      $scope.errorMessage = 'Comment couldn\'t be added';
       $scope.status = 0;
-      $scope.status_message = 0;
-    }
+      $scope.statusMessage = 0;
+    };
 
     Comments.get(getCommentSuccess, getCommentError);
 
     $scope.addComment = function() {
-      if ($scope.newComment != "undefined") {
+      if ($scope.newComment !== 'undefined') {
         var data = {
-          'hostname': window.location.hostname,
-          'pathname': window.location.pathname,
+          'href': window.location.href,
           'newComment': $scope.newComment
-        }
+        };
         Comments.add(data, addSuccess, addError);
       }
-    }
-});
+    };
+  });
