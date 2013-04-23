@@ -1,7 +1,9 @@
 <div class="">
 
-  <div ng-hide="status" class="alert alert-error">{{errorMessage}}</div>
-  <div ng-show="status && status_message" class="alert alert-success">{{statusMessage}}</div>
+  <div ng-show="isSuccess || isError" class="alert"
+    ng-class="{ 'alert-error': isError, 'alert-success': isSuccess }" >
+      {{ message }}
+  </div>
   <h1>{{ title }}</h1>
 
   <div ng-show="comments.length > 0">
@@ -39,9 +41,9 @@
       <div class="control-group">
         <label class="control-label" for="email">Email</label>
         <div class="controls">
-          <input id="email" type="text" ng-model="newComment.email" name="newEmail" required/>
+          <input id="email" type="email" ng-model="newComment.email" name="newEmail" required/>
           <div ng-show="form.newEmail.$dirty && form.newEmail.$invalid">
-            The Email address is mandatory
+            The Email address is invalid or missing
           </div>
         </div>
       </div>
