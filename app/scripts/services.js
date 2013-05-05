@@ -4,10 +4,8 @@ angular.module('PocsServices', ['ngResource']).
     factory('Comments', function($http) {
 
 
-  var url = 'http://pocs.dev/api/comments';
-  //var key = 'aHR0cDovL2RlYmlhbjU1L3BlcnNvL2pvY3MvYXBwLzE2NTQ=';
-  var key = 'aHR0cDovL2RlYmlhbjU1OjkwMDAvNzEz';
-  //var key = 'aHR0cDovL2Jsb2cuZGV2LzIyMDc=';
+  var url = '';
+  var key = '';
 
   var CommentsManager = {
     'get': function(getSuccess, getError) {
