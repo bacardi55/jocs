@@ -6,3 +6,19 @@ written with angularjs.
 
 Need a REST backend.
 Default one is pocs written in php with silex.
+
+To install:
+
+    git clone
+    grunt
+
+Take the content of the new `dist` repository, this is the compressed app.
+
+
+TODO:
+
+- Improve the rendering (eg: keep blank line, add rich text features);
+- Nested comments;
+- Email alert;
+- Rss feed?;
+- …
