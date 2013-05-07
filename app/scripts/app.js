@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jocsApp', ['PocsServices'])
+angular.module('jocsApp', ['ngSanitize', 'PocsServices'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

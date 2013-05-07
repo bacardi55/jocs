@@ -16,13 +16,9 @@
          <img class="media-object" src="{{ comment.gravatar }}">
        </a>
       <div class="media-body">
-        <h4 class="media-heading">{{ comment.user }}</h4>
-        <div class="media">
-          {{ comment.comment }}
-        </div>
-        <div>
-          {{ comment.date }}
-        </div>
+        <h4 class="media-heading" ng-bind="comment.user"></h4>
+        <div class="media" ng-bind-html="comment.comment"></div>
+        <div ng-bind-html="comment.date"> </div>
       </div>
     </li>
   </ul>
